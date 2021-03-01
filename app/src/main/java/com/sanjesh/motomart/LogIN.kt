@@ -7,5 +7,7 @@ class LogIN : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_i_n)
+
+        //yo login activity ho
     }
 }
