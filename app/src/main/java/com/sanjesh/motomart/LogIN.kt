@@ -40,7 +40,8 @@ class LogIN : AppCompatActivity() {
                     try {​​​​​​​​
                         val repository = CustomerRepository()
                         val response = repository.checkCustomer(username, password)
-                        if (response.Success == true) {​​​​​​​​
+                        if (response.Success == true) {
+
                             ServiceBuilder.token = "Bearer " + response.Token
                             startActivity(
                                 Intent(
@@ -49,32 +50,33 @@ class LogIN : AppCompatActivity() {
                                 )
                             )
                             finish()
-                        }​​​​​​​​
-                        else {​​​​​​​​
-                            withContext(Dispatchers.Main) {​​​​​​​​
+                        }
+                        else {
+                            withContext(Dispatchers.Main) {
                                 val snack =
                                     Snackbar.make(
                                         linearlayout,
                                         "Invalid credentials",
                                         Snackbar.LENGTH_LONG
                                     )
-                                snack.setAction("OK", View.OnClickListener {​​​​​​​​
+                                snack.setAction("OK", View.OnClickListener {
                                     snack.dismiss()
-                                }​​​​​​​​)
+                                })
                                 snack.show()
-                            }​​​​​​​​
-                        }​​​​​​​​
-                    }​​​​​​​​catch (ex: Exception) {​​​​​​​​
-                        withCon text(Dispatchers.Main) {​​​​​​​​
+                            }
+                        }
+                    }
+                    catch (ex: Exception) {
+                        withContext(Dispatchers.Main) {
                             Toast.makeText(
                                 this@LogIN,
                                 ex.toString(), Toast.LENGTH_SHORT
                             ).show()
-                        }​​​​​​​​
-                    }​​​​​​​​
-                }​​​​​​​​
-            }​​​​​​​​
-        }​​​​​​​​
+                        }
+                    }
+                }
+            }
+        }
 
 
 
