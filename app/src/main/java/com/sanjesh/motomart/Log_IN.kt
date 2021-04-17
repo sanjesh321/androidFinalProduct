@@ -10,6 +10,9 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import com.sanjesh.motomart.API.Servicebuilder
+import com.sanjesh.motomart.DB.UserDB
+import com.sanjesh.motomart.Notification.Sender
 import com.sanjesh.motomart.Repository.User_Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +31,7 @@ class Log_IN : AppCompatActivity() {
     private lateinit var cbRemember: CheckBox
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_log_i_n)
         etUid=findViewById(R.id.etUid)
         etPass=findViewById(R.id.etPass)
         cbRemember=findViewById(R.id.cbRemember)
@@ -40,7 +43,7 @@ class Log_IN : AppCompatActivity() {
         editor.putString("username",etUid.text.toString())
         editor.putString("password", etPass.text.toString())
         editor.apply()
-        Toast.makeText(this@LoginActivity, "Username and Password saved", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@Log_IN, "Username and Password saved", Toast.LENGTH_SHORT).show()
 
     }
     private fun checkRunTimePermission() {
@@ -49,7 +52,7 @@ class Log_IN : AppCompatActivity() {
         }
     }
     private fun requestPermission() {
-        ActivityCompat.requestPermissions(this@LoginActivity, permissions, 1)
+        ActivityCompat.requestPermissions(this@Log_IN, permissions, 1)
     }
     private fun hasPermission(): Boolean {
         var hasPermission = true
@@ -87,18 +90,18 @@ class Log_IN : AppCompatActivity() {
                     val response = repo.checkUser(etUid.text.toString(),etPass.text.toString())
                     if(response.success == true)
                     {
-                        NotificationSender(this@LoginActivity,"login successfull!!","${etUid.text.toString()}").createHighPriority()
-                        var instance = UserDB.getInstance(this@LoginActivity).getUserDAO()
+                        Sender(this@Log_IN,"login successfull!!","${etUid.text.toString()}").createHighPriority()
+                        var instance = UserDB.getInstance(this@Log_IN).getUserDAO()
                         instance.registerUser(response.data!!)
                         withContext(Dispatchers.Main)
                         {
-                            ServiceBuilder.token = "Bearer "+response.token
+                            Servicebuilder.token = "Bearer "+response.token
                             if(cbRemember.isChecked){
                                 saveSharedPref()
                             }
-                            val intent = Intent(this@LoginActivity,Main_Activity::class.java)
+                            val intent = Intent(this@Log_IN,Main_Activity::class.java)
                             startActivity(intent)
-                            Toast.makeText(this@LoginActivity, "Logged in", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@Log_IN, "Logged in", Toast.LENGTH_SHORT).show()
                         }
                     }
                     else
@@ -106,7 +109,7 @@ class Log_IN : AppCompatActivity() {
                         withContext(Dispatchers.Main)
                         {
 
-                            Toast.makeText(this@LoginActivity, "Invalid credentials", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@Log_IN, "Invalid credentials", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -115,7 +118,7 @@ class Log_IN : AppCompatActivity() {
                     println(ex.printStackTrace())
                     withContext(Dispatchers.Main)
                     {
-                        Toast.makeText(this@LoginActivity, "${ex.toString()}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@Log_IN, "${ex.toString()}", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -123,7 +126,7 @@ class Log_IN : AppCompatActivity() {
 
     }
     fun registerRoute(view: View) {
-        val intent = Intent(this,SignUpActivity::class.java)
+        val intent = Intent(this,Sign_Up::class.java)
         startActivity(intent)
     }
 }

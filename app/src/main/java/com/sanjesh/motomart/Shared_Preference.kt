@@ -9,7 +9,7 @@ class Shared_Preference : AppCompatActivity() {
     val password = "123"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_shared_pref)
+        setContentView(R.layout.activity_shared__prefence)
         saveSharedPref()
         getSharedPref()
 
@@ -31,6 +31,6 @@ class Shared_Preference : AppCompatActivity() {
         editor.putString("username",username)
         editor.putString("password", password)
         editor.apply()
-        Toast.makeText(this@SharedPref, "Username and Password saved", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@Shared_Preference, "Username and Password saved", Toast.LENGTH_SHORT).show()
 
     }

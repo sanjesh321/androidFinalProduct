@@ -7,13 +7,16 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
+import com.sanjesh.motomart.API.Servicebuilder
+import com.sanjesh.motomart.Entity.product
+import com.sanjesh.motomart.Repository.Cart_Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class Product_View : AppCompatActivity(), View.OnClickListener {
-    private var product: Product? =null
+    private var product: product? =null
     private lateinit var tvPrice: TextView
 
     private lateinit var tvProduct: TextView
@@ -22,7 +25,7 @@ class Product_View : AppCompatActivity(), View.OnClickListener {
     private lateinit var ivPart: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_single_product_view)
+        setContentView(R.layout.activity_product__view)
         tvPrice = findViewById(R.id.tvPrice)
 
         tvDescription = findViewById(R.id.tvDescription)
@@ -39,8 +42,8 @@ class Product_View : AppCompatActivity(), View.OnClickListener {
         tvDescription.text = product!!.pdesc
         tvProduct.text = product!!.pname
 
-        var imgPath = ServiceBuilder.loadImagePath()+product!!.pimage!!.replace("\\","/")
-        Glide.with(this@SingleProductView).load(imgPath).into(ivPart)
+        var imgPath = Servicebuilder.loadImagePath()+product!!.pimage!!.replace("\\","/")
+        Glide.with(this@Product_View).load(imgPath).into(ivPart)
 
     }
     override fun onClick(v: View?) {
@@ -49,7 +52,7 @@ class Product_View : AppCompatActivity(), View.OnClickListener {
             R.id.btnAdd->{
                 CoroutineScope(Dispatchers.IO).launch {
                     try {
-                        val cartRepository = CartRepository()
+                        val cartRepository = Cart_Repository()
                         val response = cartRepository.addToCart(product!!._id,"1")
                         if(response.success == true)
                         {

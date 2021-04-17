@@ -11,10 +11,14 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.sanjesh.motomart.API.Servicebuilder
+import com.sanjesh.motomart.Entity.product
+import com.sanjesh.motomart.Product_View
+import com.sanjesh.motomart.R
 
 class Product_Adapter(
     val context: Context,
-    val lstProduct: MutableList<Product>
+    val lstProduct: MutableList<product>
 ) : RecyclerView.Adapter<Product_Adapter.ProductViewHolder>() {
     class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvpName: TextView = view.findViewById(R.id.pName)
@@ -31,11 +35,11 @@ class Product_Adapter(
         val product = lstProduct[position]
         holder.tvpName.text = product.pname
         holder.tvpPrice.text = product.pprice.toString()
-        var imagepath = ServiceBuilder.loadImagePath() + product.pimage
+        var imagepath = Servicebuilder.loadImagePath() + product.pimage
         imagepath = imagepath.replace("\\", "/")
         Glide.with(context).load(imagepath).into(holder.ivpImage)
         holder.button.setOnClickListener {
-            var intent = Intent(context,SingleProductView::class.java)
+            var intent = Intent(context,Product_View::class.java)
             intent.putExtra("product",product)
             context.startActivity(intent)
         }

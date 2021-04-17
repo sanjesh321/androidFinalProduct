@@ -17,6 +17,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.PopupMenu
 import com.google.android.material.snackbar.Snackbar
+import com.sanjesh.motomart.DB.UserDB
+import com.sanjesh.motomart.Repository.User_Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -61,14 +63,14 @@ class Update : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
     private fun initialize()
     {
         CoroutineScope(Dispatchers.IO).launch {
-            var instance = UserDB.getInstance(this@UpdateActivity).getUserDAO()
+            var instance = UserDB.getInstance(this@Update).getUserDAO()
             var user = instance.checkUser()
             withContext(Dispatchers.Main)
             {
                 if(user.si_profilepic != null && user.si_profilepic!="no-img.jpg")
                 {
                     var imgPath = ServiceBuilder.loadImagePath()+user.si_profilepic!!.replace("\\","/")
-                    Glide.with(this@UpdateActivity).load(imgPath).into(ivPp)
+                    Glide.with(this@Update).load(imgPath).into(ivPp)
                 }
                 else
                 {
@@ -92,15 +94,15 @@ class Update : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
             val body = MultipartBody.Part.createFormData("profileImg", file.name, req_file)
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val repo = UserRepository()
+                    val repo = User_Repository()
                     val response = repo.uploadImage(body)
                     if (response.success == true) {
-                        var instance = UserDB.getInstance(this@UpdateActivity).getUserDAO()
+                        var instance = UserDB.getInstance(this@Update).getUserDAO()
                         instance.delete()
                         instance.registerUser(response.data!!)
                         withContext(Dispatchers.Main)
                         {
-                            var intent = Intent(this@UpdateActivity, MainActivity::class.java)
+                            var intent = Intent(this@Update, Main_Activity::class.java)
                             startActivity(intent)
                         }
                     } else {
@@ -208,16 +210,16 @@ class Update : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
         {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val repo = UserRepository()
+                    val repo = User_Repository()
                     val response = repo.editUser(etFn.text.toString(),etln.text.toString(),etEmail.text.toString(),etUsername.text.toString())
                     if(response.success == true)
                     {
-                        var instance = UserDB.getInstance(this@UpdateActivity).getUserDAO()
+                        var instance = UserDB.getInstance(this@Update).getUserDAO()
                         instance.delete()
                         instance.registerUser(response.data!!)
                         withContext(Dispatchers.Main)
                         {
-                            var intent = Intent(this@UpdateActivity,MainActivity::class.java)
+                            var intent = Intent(this@Update,Main_Activity::class.java)
                             startActivity(intent)
                         }
                     }

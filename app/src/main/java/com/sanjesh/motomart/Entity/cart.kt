@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 data class cart(
     @PrimaryKey
     val _id:String = "",
-    val p_id:Product?=null,
+    val p_id:product?=null,
     val u_id:String?=null,
     var pprice:Int=0,
     var pquantity:Int=0

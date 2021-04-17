@@ -8,28 +8,28 @@ import com.sanjesh.motomart.Entity.User
 import com.sanjesh.motomart.Response.User_Response
 import okhttp3.MultipartBody
 
-class User_Repository:MyApiRequest() {
-    val MyAPI= ServiceBuilder.buildServices(MyAPI::class.java)
+class User_Repository:MyapiRequest() {
+    val MyAPI= Servicebuilder.buildServices(MyAPI::class.java)
 
-    suspend fun registerUser(user : User): UserResponse {
+    suspend fun registerUser(user : User): User_Response {
         return apiRequest {
             MyAPI.registerUser(user)
         }
     }
-    suspend fun checkUser(username : String, password : String): LoginResponse {
+    suspend fun checkUser(username : String, password : String): Login_Response {
         return apiRequest {
             MyAPI.checkUser(username, password)
         }
     }
     suspend fun uploadImage( body: MultipartBody.Part)
-            : LoginResponse {
+            : Login_Response {
         return apiRequest {
-            MyAPI.uploadImage(ServiceBuilder.token!!, body)
+            MyAPI.uploadImage(Servicebuilder.token!!, body)
         }
     }
-    suspend fun editUser(fn:String,ln:String,em:String,un:String):LoginResponse{
+    suspend fun editUser(fn:String,ln:String,em:String,un:String):Login_Response{
         return apiRequest {
-            MyAPI.editDetails(ServiceBuilder.token!!, fn,ln,em,un)
+            MyAPI.editDetails(Servicebuilder.token!!, fn,ln,em,un)
         }
     }
 }

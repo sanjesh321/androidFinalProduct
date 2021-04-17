@@ -12,13 +12,18 @@ import android.widget.TextView
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.sanjesh.motomart.API.Servicebuilder
+import com.sanjesh.motomart.API.Static_cart
+import com.sanjesh.motomart.Entity.cart
+import com.sanjesh.motomart.R
+import com.sanjesh.motomart.Repository.Cart_Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class Cart_Adapter(val context: Context, var lstCart:MutableList<Cart>, var refresh:CartRefresh):
-    RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+class Cart_Adapter(val context: Context, var lstCart:MutableList<cart>, var refresh:CartRefresh):
+    RecyclerView.Adapter<Cart_Adapter.CartViewHolder>() {
     class CartViewHolder(val view: View): RecyclerView.ViewHolder(view) {
         val tvProduct: TextView
         val tvPrice: TextView
@@ -55,7 +60,7 @@ class Cart_Adapter(val context: Context, var lstCart:MutableList<Cart>, var refr
         holder.tvQuantity.text = cart.pquantity.toString()
 
 
-        var imagePath = ServiceBuilder.loadImagePath() + cart.p_id!!.pimage!!.replace("\\", "/")
+        var imagePath = Servicebuilder.loadImagePath() + cart.p_id!!.pimage!!.replace("\\", "/")
         Glide.with(context).load(imagePath).into(holder.ivProduct)
 
         //comes from db
@@ -71,7 +76,7 @@ class Cart_Adapter(val context: Context, var lstCart:MutableList<Cart>, var refr
             }
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val repo = CartRepository()
+                    val repo = Cart_Repository()
                     var quantity = cart.pquantity + 1
                     val response = repo.updateCart(cart._id, quantity)
                     if (response.success == true) {
@@ -113,7 +118,7 @@ class Cart_Adapter(val context: Context, var lstCart:MutableList<Cart>, var refr
                 }
                 CoroutineScope(Dispatchers.IO).launch {
                     try {
-                        val repo = CartRepository()
+                        val repo = Cart_Repository()
                         var quantity = cart.pquantity - 1
                         val response = repo.updateCart(cart._id, quantity)
                         if (response.success == true) {
@@ -164,12 +169,12 @@ class Cart_Adapter(val context: Context, var lstCart:MutableList<Cart>, var refr
         }
         holder.cbCheck.setOnClickListener {
             if (holder.cbCheck.isChecked == true) {
-                if (!StaticCart.myCart.contains(cart)) {
-                    StaticCart.myCart.add(cart)
+                if (!Static_cart.myCart.contains(cart)) {
+                    Static_cart.myCart.add(cart)
                     refresh.refreshCartActivity()
                 }
             } else {
-                StaticCart.myCart.remove(cart)
+                Static_cart.myCart.remove(cart)
                 refresh.refreshCartActivity()
             }
         }

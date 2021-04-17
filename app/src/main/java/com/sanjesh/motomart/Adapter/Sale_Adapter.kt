@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.sanjesh.motomart.Entity.product_sale
+import com.sanjesh.motomart.R
 
-class Sale_Adapter(private val lstSale: ArrayList<ProductSale>,
+class Sale_Adapter(private val lstSale: ArrayList<product_sale>,
                   val context: Context
 ): RecyclerView.Adapter<Sale_Adapter.SaleViewHolder>() {
     class SaleViewHolder(view: View) : RecyclerView.ViewHolder(view) {

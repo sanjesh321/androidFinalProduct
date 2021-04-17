@@ -11,17 +11,21 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.sanjesh.motomart.API.Static_cart
+import com.sanjesh.motomart.Adapter.Cart_Adapter
+import com.sanjesh.motomart.Main_Activity
 import com.sanjesh.motomart.R
+import com.sanjesh.motomart.Repository.Cart_Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class Category_fragment : Fragment(),View.OnClickListener,CartRefresh{
+class Category_fragment : Fragment(),View.OnClickListener,Refresh_Cart{
     private lateinit var tvCartDesc : TextView
     private lateinit var btnContinue : Button
     private lateinit var recycler: RecyclerView
-    private lateinit var adapter: CartAdapter
+    private lateinit var adapter: Cart_Adapter
     private lateinit var btnDelete: Button
     private lateinit var checkout: TextView
     override fun onCreateView(
@@ -46,10 +50,10 @@ class Category_fragment : Fragment(),View.OnClickListener,CartRefresh{
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val cartRepository = CartRepository()
+                val cartRepository = Cart_Repository()
                 val response = cartRepository.retrieveCart()
                 if (response.success == true) {
-                    StaticCart.lstCart = response.data!!
+                    Static_cart.lstCart = response.data!!
                     println(response)
                     withContext(Dispatchers.Main)
                     {
@@ -88,10 +92,10 @@ class Category_fragment : Fragment(),View.OnClickListener,CartRefresh{
 
     private fun loadData()
     {
-        if(StaticCart.lstCart.size > 0)
+        if(Static_cart.lstCart.size > 0)
         {
-            tvCartDesc.text = "${StaticCart.lstCart.size} items in cart."
-            adapter = CartAdapter(requireContext(),StaticCart.lstCart,this)
+            tvCartDesc.text = "${Static_cart.lstCart.size} items in cart."
+            adapter = Cart_Adapter(requireContext(),Static_cart.lstCart,this)
             recycler.adapter = adapter
             recycler.layoutManager = LinearLayoutManager(requireContext())
             btnContinue.visibility = View.GONE
@@ -108,15 +112,15 @@ class Category_fragment : Fragment(),View.OnClickListener,CartRefresh{
         {
             R.id.btnDelete->{
 
-                if(StaticCart.myCart.size>0)
+                if(Static_cart.myCart.size>0)
                 {
                     CoroutineScope(Dispatchers.IO).launch {
                         try {
-                            val repo = CartRepository()
-                            val response = repo.deleteCart(StaticCart.myCart[0]._id)
+                            val repo = Cart_Repository()
+                            val response = repo.deleteCart(Static_cart.myCart[0]._id)
                             if(response.success == true)
                             {
-                                StaticCart.lstCart.remove(StaticCart.lstCart[0])
+                                Static_cart.lstCart.remove(Static_cart.lstCart[0])
 
                                 withContext(Dispatchers.Main)
                                 {
@@ -154,7 +158,7 @@ class Category_fragment : Fragment(),View.OnClickListener,CartRefresh{
             }
 
             R.id.btnContinue->{
-                val intent = Intent(requireContext(), MainActivity::class.java)
+                val intent = Intent(requireContext(), Main_Activity::class.java)
                 startActivity(intent)
             }
         }
@@ -162,9 +166,9 @@ class Category_fragment : Fragment(),View.OnClickListener,CartRefresh{
 
 
     override fun refreshCartActivity() {
-        if (StaticCart.myCart.size > 0) {
+        if (Static_cart.myCart.size > 0) {
 
-            var prices = StaticCart.myCart.map {
+            var prices = Static_cart.myCart.map {
                 it.pprice
             }
             var totalPrice = prices.reduce { acc, i ->
@@ -183,13 +187,13 @@ class Category_fragment : Fragment(),View.OnClickListener,CartRefresh{
     }
     private fun loadContent()
     {
-        adapter = CartAdapter(requireContext(),StaticCart.lstCart,this)
+        adapter = Cart_Adapter(requireContext(),Static_cart.lstCart,this)
         recycler.adapter = adapter
         adapter.notifyDataSetChanged()
-        StaticCart.myCart = mutableListOf()
+        Static_cart.myCart = mutableListOf()
         btnDelete.visibility=View.GONE
         checkout.visibility = View.GONE
-        if(StaticCart.lstCart.size > 0)
+        if(Static_cart.lstCart.size > 0)
         {
             tvCartDesc.text = "${StaticCart.lstCart.size} items in cart."
             btnContinue.visibility = View.GONE

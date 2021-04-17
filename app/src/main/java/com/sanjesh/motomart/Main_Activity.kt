@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.sanjesh.motomart.Notification.Sender
+import com.sanjesh.motomart.fragments.Category_fragment
+import com.sanjesh.motomart.fragments.Home_fragment
 
 
 class Main_Activity : AppCompatActivity(), SensorEventListener {
@@ -32,9 +35,9 @@ class Main_Activity : AppCompatActivity(), SensorEventListener {
             sensorManager.registerListener(this, sensor3, SensorManager.SENSOR_DELAY_NORMAL)
         }
         navigation = findViewById(R.id.dropdown)
-        val homeFragments = HomeFragment()
-        val categoryFragment = CategoryFragment()
-        val settings = SettingsFragment()
+        val homeFragments = Home_fragment()
+        val categoryFragment = Category_fragment()
+        val settings = Settings_fragment()
 
 
         getFragment(homeFragments)
@@ -88,7 +91,7 @@ class Main_Activity : AppCompatActivity(), SensorEventListener {
             val values = event!!.values[0]
             if(values > 20000)
             {
-                NotificationSender(this,"WARNING: High Light","").createHighPriority()
+                Sender(this,"WARNING: High Light","").createHighPriority()
             }
         }
         if(event!!.sensor.type == Sensor.TYPE_ACCELEROMETER)
@@ -96,12 +99,12 @@ class Main_Activity : AppCompatActivity(), SensorEventListener {
             val values = event!!.values[0]
             if(values > 7)
             {
-                val intent = Intent(this@Main_Activity,LoginActivity::class.java)
+                val intent = Intent(this@Main_Activity,Log_IN::class.java)
                 startActivity(intent)
             }
             else if(values > 7 && values < 10)
             {
-                val intent = Intent(this@Main_Activity,SignUpActivity::class.java)
+                val intent = Intent(this@Main_Activity,Sign_Up::class.java)
                 startActivity(intent)
             }
 

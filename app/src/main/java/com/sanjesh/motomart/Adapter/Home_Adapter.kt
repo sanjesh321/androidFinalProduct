@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.sanjesh.motomart.Entity.category
+import com.sanjesh.motomart.R
 
-class Home_Adapter(private val lstCategory: ArrayList<Categories>,
-                  val context: Context
+class Home_Adapter(private val lstCategory: ArrayList<category>,
+                   val context: Context
 ): RecyclerView.Adapter<Home_Adapter.CategoriesViewHolder>() {
     class CategoriesViewHolder(view: View): RecyclerView.ViewHolder(view){
         val ivCat: ImageView

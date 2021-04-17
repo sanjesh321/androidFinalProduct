@@ -11,9 +11,9 @@ class Channels(val context: Context) {
     val channel2:String="Channel2"
     fun createNotificationChannels()
     {
-        val channel_1 = NotificationChannel(channel1,"highChannel", NotificationManager.IMPORTANCE_HIGH)
+        val channel_1 = Channels(channel1,"highChannel", NotificationManager.IMPORTANCE_HIGH)
         channel_1.description = "Notification from Channel 1"
-        val channel_2 = NotificationChannel(channel2,"lowChannel", NotificationManager.IMPORTANCE_LOW)
+        val channel_2 = Channels(channel2,"lowChannel", NotificationManager.IMPORTANCE_LOW)
         channel_2.description = "Notification from Channel 2"
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel_1)

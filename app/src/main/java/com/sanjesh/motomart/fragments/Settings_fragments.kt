@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.sanjesh.motomart.Product_View
 import com.sanjesh.motomart.R
+import com.sanjesh.motomart.Update
 
 class Settings_fragments : Fragment() {
     private lateinit var btn: TextView
@@ -25,12 +27,12 @@ class Settings_fragments : Fragment() {
         Logout = view.findViewById(R.id.Logout)
         aboutUs = view.findViewById(R.id.aboutUs)
         btn.setOnClickListener{
-            startActivity(Intent(requireContext(),UpdateActivity::class.java))
+            startActivity(Intent(requireContext(),Update::class.java))
         }
 //        Cart.setOnClickListener {
 //        }
         aboutUs.setOnClickListener {
-            startActivity(Intent(requireContext(),SingleProductView::class.java))
+            startActivity(Intent(requireContext(),Product_View::class.java))
         }
 
 

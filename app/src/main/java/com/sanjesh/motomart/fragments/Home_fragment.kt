@@ -8,7 +8,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.sanjesh.motomart.Adapter.Home_Adapter
+import com.sanjesh.motomart.Adapter.Product_Adapter
+import com.sanjesh.motomart.Entity.category
+import com.sanjesh.motomart.Entity.product
 import com.sanjesh.motomart.R
+import com.sanjesh.motomart.Repository.Product_Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,8 +24,8 @@ class Home_fragment : Fragment() {
     private lateinit var saleGridView: RecyclerView
     //    private lateinit var productView:ConstraintLayout
     val imageList = ArrayList<SlideModel>() // Create image list
-    private var lstCategory = ArrayList<Categories>()
-    private var lstProduct : MutableList<Product> = mutableListOf()
+    private var lstCategory = ArrayList<category>()
+    private var lstProduct : MutableList<product> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,37 +60,37 @@ class Home_fragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 lstCategory.add(
-                    Categories(
+                    category(
                         "https://st2.depositphotos.com/3265223/11737/v/950/depositphotos_117379428-stock-illustration-cpu-icon-central-processing-unit.jpg",
                         "CPU"
                     )
                 )
                 lstCategory.add(
-                    Categories(
+                    category(
                         "https://png.pngtree.com/png-clipart/20190614/original/pngtree-vector-room-cooler-icon-png-image_3762890.jpg",
                         "CPU"
                     )
                 )
                 lstCategory.add(
-                    Categories(
+                    category(
                         "https://png.pngtree.com/png-clipart/20190614/original/pngtree-vector-room-cooler-icon-png-image_3762890.jpg",
                         "CPU"
                     )
                 )
                 lstCategory.add(
-                    Categories(
+                    category(
                         "https://st2.depositphotos.com/3265223/11737/v/950/depositphotos_117379428-stock-illustration-cpu-icon-central-processing-unit.jpg",
                         "CPU"
                     )
                 )
                 lstCategory.add(
-                    Categories(
+                    category(
                         "https://png.pngtree.com/png-clipart/20190614/original/pngtree-vector-room-cooler-icon-png-image_3762890.jpg",
                         "CPU"
                     )
                 )
                 lstCategory.add(
-                    Categories(
+                    category(
                         "https://png.pngtree.com/png-clipart/20190614/original/pngtree-vector-room-cooler-icon-png-image_3762890.jpg",
                         "CPU"
                     )
@@ -93,7 +98,7 @@ class Home_fragment : Fragment() {
                 withContext(Dispatchers.Main) {
                     homeCategory.layoutManager =
                         LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                    homeCategory.adapter = HomeAdapter(lstCategory, context!!)
+                    homeCategory.adapter = Home_Adapter(lstCategory, context!!)
 
                 }
             } catch (ex: Exception) {
@@ -110,14 +115,14 @@ class Home_fragment : Fragment() {
     fun loadSaleProduct(){
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val repo = ProductRepository()
+                val repo = Product_Repository()
                 val response = repo.retrieveProducts()
                 lstProduct = response.data!!
                 println(lstProduct)
                 withContext(Dispatchers.Main) {
                     saleGridView.layoutManager =
                         LinearLayoutManager(context)
-                    saleGridView.adapter = ProductAdapter(context!!, lstProduct)
+                    saleGridView.adapter = Product_Adapter(context!!, lstProduct)
                 }
             } catch (ex: Exception) {
                 println(ex.printStackTrace())

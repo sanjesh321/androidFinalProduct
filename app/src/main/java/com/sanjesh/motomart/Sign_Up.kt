@@ -56,15 +56,15 @@ class Sign_Up : AppCompatActivity() {
                     val response = userRepo.registerUser(user)
                     if(response.message==true) {
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(this@SignUpActivity, "User Registered", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this@SignUpActivity,LoginActivity::class.java)
+                            Toast.makeText(this@Sign_Up, "User Registered", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@Sign_Up,Log_IN::class.java)
                             startActivity(intent)
                         }
                     }
                     else
                     {
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(this@SignUpActivity,"Error", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@Sign_Up,"Error", Toast.LENGTH_SHORT).show()
 
                         }
                     }
@@ -76,7 +76,7 @@ class Sign_Up : AppCompatActivity() {
             {
                 CoroutineScope(Dispatchers.IO).launch {
                     withContext(Dispatchers.Main){
-                        Toast.makeText(this@SignUpActivity, "User already exists", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@Sign_Up, "User already exists", Toast.LENGTH_SHORT).show()
                     }
                 }
 

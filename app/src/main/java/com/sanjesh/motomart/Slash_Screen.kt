@@ -7,6 +7,9 @@ import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.sanjesh.motomart.API.Servicebuilder
+import com.sanjesh.motomart.DB.UserDB
+import com.sanjesh.motomart.Repository.User_Repository
 import kotlinx.coroutines.*
 import java.lang.Exception
 
@@ -15,7 +18,7 @@ class Slash_Screen : AppCompatActivity() {
     var password: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_slash_screen)
+        setContentView(R.layout.activity_slash__screen)
         if (!checkInternetConnection()) {
             Toast.makeText(
                 this,
@@ -36,8 +39,8 @@ class Slash_Screen : AppCompatActivity() {
             delay(1000)
             startActivity(
                 Intent(
-                    this@SlashScreen,
-                    LoginActivity::class.java
+                    this@Slash_Screen,
+                    Log_IN::class.java
                 )
             )
         }
@@ -45,17 +48,17 @@ class Slash_Screen : AppCompatActivity() {
     private fun login() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val repository = UserRepository()
+                val repository = User_Repository()
                 val response = repository.checkUser(username!!, password!!)
                 if (response.success == true) {
                     // Save token
-                    var instance = UserDB.getInstance(this@SlashScreen).getUserDAO()
+                    var instance = UserDB.getInstance(this@Slash_Screen).getUserDAO()
                     instance.registerUser(response.data!!)
-                    ServiceBuilder.token = "Bearer ${response.token}"
+                    Servicebuilder.token = "Bearer ${response.token}"
                     startActivity(
                         Intent(
-                            this@SlashScreen,
-                            MainActivity::class.java
+                            this@Slash_Screen,
+                            Main_Activity::class.java
                         )
                     )
                     finish()
@@ -68,7 +71,7 @@ class Slash_Screen : AppCompatActivity() {
 
                 withContext(Dispatchers.Main) {
                     Toast.makeText(
-                        this@SlashScreen,
+                        this@Slash_Screen,
                         ex.toString(),
                         Toast.LENGTH_SHORT
                     ).show()
@@ -90,8 +93,8 @@ class Slash_Screen : AppCompatActivity() {
     private fun loadLoginPage() {
         startActivity(
             Intent(
-                this@SlashScreen,
-                LoginActivity::class.java
+                this@Slash_Screen,
+                Log_IN::class.java
             )
         )
         finish()
