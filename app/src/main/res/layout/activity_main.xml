@@ -1,4 +1,4 @@
- <?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,13 +10,16 @@
         android:id="@+id/fl_wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/dropdown"/>
+        android:layout_above="@id/dropdown">
+
+    </FrameLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/dropdown"
+        android:background="@color/black"
+        app:labelVisibilityMode="labeled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/design_default_color_secondary"
         app:menu="@menu/dropdown"/>
 
 </RelativeLayout>

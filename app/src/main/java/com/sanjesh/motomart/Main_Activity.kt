@@ -12,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sanjesh.motomart.Notification.Sender
 import com.sanjesh.motomart.fragments.Category_fragment
 import com.sanjesh.motomart.fragments.Home_fragment
+import com.sanjesh.motomart.fragments.Settings_fragments
 
 
 class Main_Activity : AppCompatActivity(), SensorEventListener {
@@ -37,7 +38,7 @@ class Main_Activity : AppCompatActivity(), SensorEventListener {
         navigation = findViewById(R.id.dropdown)
         val homeFragments = Home_fragment()
         val categoryFragment = Category_fragment()
-        val settings = Settings_fragment()
+        val settings = Settings_fragments()
 
 
         getFragment(homeFragments)
