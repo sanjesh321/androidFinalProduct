@@ -24,7 +24,7 @@ class Sign_Up : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        setContentView(R.layout.activity_register)
         etFn = findViewById(R.id.etFn)
         etln = findViewById(R.id.etln)
         etEmail = findViewById(R.id.etEmail)
