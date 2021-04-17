@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MotoMart">
-        <activity android:name=".DAO.Product_dao"></activity>
+        <activity android:name=".API.Cart_API"></activity>
+        <activity android:name=".DAO.Product_dao" />
         <activity android:name=".Entity.product_sale" />
         <activity android:name=".Entity.product" />
         <activity android:name=".Entity.category" />
