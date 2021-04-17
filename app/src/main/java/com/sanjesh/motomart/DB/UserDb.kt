@@ -8,16 +8,18 @@ import com.sanjesh.motomart.DAO.User_Dao
 import com.sanjesh.motomart.Entity.User
 
 @Database(
-    entities = [(User::class)],
-    version = 2
+    entities = [(User::class),(Product::class)],
+    version = 5,
+    exportSchema = false
 )
 
 abstract class UserDB : RoomDatabase() {
-    abstract fun getUser_Dao(): User_Dao
+    abstract fun getUserDAO():UserDAO
+    abstract fun getProductDAO():ProductDAO
     companion object{
         @Volatile
         private var instance: UserDB? = null
-        fun getInstance(context: Context): UserDB {
+        fun getInstance(context:Context): UserDB {
             if (instance == null){
                 kotlin.synchronized(UserDB::class){
                     instance = buildDatabase(context)
@@ -30,7 +32,7 @@ abstract class UserDB : RoomDatabase() {
                 context.applicationContext,
                 UserDB::class.java,
                 "UsersDB"
-            ).build()
+            ).fallbackToDestructiveMigration().build()
         }
     }
 

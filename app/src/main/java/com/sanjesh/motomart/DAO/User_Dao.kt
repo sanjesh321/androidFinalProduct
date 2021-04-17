@@ -7,9 +7,9 @@ import com.sanjesh.motomart.Entity.User
 
 interface User_Dao {
     @Insert
-    suspend fun registerUser(user: User)
-    @Query("Select * from User where si_Email=(:Email) and si_password=(:password)")
-    suspend fun checkUser(Email: String, password: String):User
-    @Delete
-    suspend fun delete(user: User)
+    suspend fun registerUser(user:User)
+    @Query("Select * from User")
+    suspend fun checkUser():User
+    @Query("Delete from User")
+    suspend fun delete()
 }
