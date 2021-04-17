@@ -4,18 +4,130 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.sanjesh.motomart.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 class Home_fragment : Fragment() {
+    private lateinit var homeCategory: RecyclerView
+    private lateinit var saleGridView: RecyclerView
+    //    private lateinit var productView:ConstraintLayout
+    val imageList = ArrayList<SlideModel>() // Create image list
+    private var lstCategory = ArrayList<Categories>()
+    private var lstProduct : MutableList<Product> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+
+
+// imageList.add(SlideModel("String Url" or R.drawable)
+// imageList.add(SlideModel("String Url" or R.drawable, "title") You can add title
+
+
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        addImageSlider()
+        val imageSlider = view.findViewById<ImageSlider>(R.id.image_slider)
+        imageSlider.setImageList(imageList)
+        //reclycler view for categories
+        homeCategory = view.findViewById(R.id.homeCategory)
+        saleGridView = view.findViewById(R.id.saleGridView)
+        loadcategories()
+        loadSaleProduct()
+        return view
     }
-}
+
+    fun addImageSlider() {
+        imageList.add(SlideModel(R.drawable.psu, "Power Supply"))
+        imageList.add(SlideModel(R.drawable.img1, "Cases"))
+        imageList.add(SlideModel(R.drawable.rtx, "Graphic Card"))
+    }
+
+    fun loadcategories() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                lstCategory.add(
+                    Categories(
+                        "https://st2.depositphotos.com/3265223/11737/v/950/depositphotos_117379428-stock-illustration-cpu-icon-central-processing-unit.jpg",
+                        "CPU"
+                    )
+                )
+                lstCategory.add(
+                    Categories(
+                        "https://png.pngtree.com/png-clipart/20190614/original/pngtree-vector-room-cooler-icon-png-image_3762890.jpg",
+                        "CPU"
+                    )
+                )
+                lstCategory.add(
+                    Categories(
+                        "https://png.pngtree.com/png-clipart/20190614/original/pngtree-vector-room-cooler-icon-png-image_3762890.jpg",
+                        "CPU"
+                    )
+                )
+                lstCategory.add(
+                    Categories(
+                        "https://st2.depositphotos.com/3265223/11737/v/950/depositphotos_117379428-stock-illustration-cpu-icon-central-processing-unit.jpg",
+                        "CPU"
+                    )
+                )
+                lstCategory.add(
+                    Categories(
+                        "https://png.pngtree.com/png-clipart/20190614/original/pngtree-vector-room-cooler-icon-png-image_3762890.jpg",
+                        "CPU"
+                    )
+                )
+                lstCategory.add(
+                    Categories(
+                        "https://png.pngtree.com/png-clipart/20190614/original/pngtree-vector-room-cooler-icon-png-image_3762890.jpg",
+                        "CPU"
+                    )
+                )
+                withContext(Dispatchers.Main) {
+                    homeCategory.layoutManager =
+                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                    homeCategory.adapter = HomeAdapter(lstCategory, context!!)
+
+                }
+            } catch (ex: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        context,
+                        "Error : ${ex.toString()}", Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+        }
+    }
+    fun loadSaleProduct(){
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val repo = ProductRepository()
+                val response = repo.retrieveProducts()
+                lstProduct = response.data!!
+                println(lstProduct)
+                withContext(Dispatchers.Main) {
+                    saleGridView.layoutManager =
+                        LinearLayoutManager(context)
+                    saleGridView.adapter = ProductAdapter(context!!, lstProduct)
+                }
+            } catch (ex: Exception) {
+                println(ex.printStackTrace())
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        context,
+                        "Error : ${ex.toString()}", Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+        }
+    }
