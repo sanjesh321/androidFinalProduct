@@ -1,63 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/linearlayout"
-    android:orientation="vertical"
-    tools:context=".loginActivity">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:text="Login"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:textSize="45sp" />
+    tools:context=".Log_IN"
+    android:orientation="vertical">
 
     <EditText
-        android:id="@+id/username"
-        android:layout_width="match_parent"
+        android:id="@+id/etUid"
+        android:layout_marginTop="300dp"
+        android:layout_width="250dp"
+        android:hint="Email/Username"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="Username..." />
+        android:layout_gravity="center"
+        />
     <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
+        android:id="@+id/etPass"
         android:inputType="textPassword"
-        android:layout_marginEnd="20dp"
-        android:hint="Password..." />
-    <Button
-        android:id="@+id/login"
-        android:layout_width="match_parent"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="Password"
+        android:layout_width="250dp"
+        android:hint="Password"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:onClick="login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="#5ca08e"
         android:text="Login"/>
-
-    <Button
-        android:id="@+id/btncustomerRegistration"
-        android:layout_width="match_parent"
+    <TextView
+        android:onClick="registerRoute"
+        android:textColor="#1E90FF"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="Create an new account"/>
+        android:text="Don't Have an account? "/>
 
 </LinearLayout>

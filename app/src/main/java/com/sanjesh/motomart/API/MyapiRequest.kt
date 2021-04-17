@@ -5,7 +5,7 @@ import org.json.JSONObject
 import retrofit2.Response
 import java.io.IOException
 
-class MyapiRequest {
+abstract class MyapiRequest {
     suspend fun <T : Any> apiRequest(call: suspend () -> Response<T>): T {
         val response = call.invoke()//call garni kam garxa
         if (response.isSuccessful) {//body ko response

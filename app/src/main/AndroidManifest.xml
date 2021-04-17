@@ -9,9 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MotoMart">
-        <activity android:name=".RegisterAct"></activity>
-        <activity android:name=".LogIN" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Repository.Product_Repository"></activity>
+        <activity android:name=".Repository.Cart_Repository" />
+        <activity android:name=".Response.Product_Response" />
+        <activity android:name=".Response.Image_Response" />
+        <activity android:name=".Response.Cart_Response" />
+        <activity android:name=".Update" />
+        <activity android:name=".Product_View" />
+        <activity android:name=".Category_View" />
+        <activity android:name=".Slash_Screen" />
+        <activity android:name=".SignUp_Activity" />
+        <activity android:name=".Signup_Act" />
+        <activity android:name=".Shared_Preference" />
+        <activity android:name=".Shared_Prefence" />
+        <activity android:name=".RegisterAct" />
+        <activity android:name=".Log_IN" />
+        <activity android:name=".Main_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
