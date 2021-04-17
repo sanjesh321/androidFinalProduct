@@ -3,20 +3,37 @@ package com.sanjesh.motomart.API
 import Login_Response
 import com.sanjesh.motomart.Entity.User
 import com.sanjesh.motomart.Response.User_Response
+import okhttp3.MultipartBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface Myapi {
-    @POST("/register")
-    suspend fun registerUser(@Body user: User): Response<User_Response>
+    @POST("/register/user")
+    suspend fun registerUser(@Body user: User): Response<UserResponse>
 
     @FormUrlEncoded
-    @POST("login")
+    @POST("/login/User")
     suspend fun checkUser(
-        @Field("username") username: String,
-        @Field("password") password: String
-    ): Response<Login_Response>
+        @Field("si_Email") username: String,
+        @Field("si_password") password: String
+    ): Response<LoginResponse>
+
+    @POST("regProduct")
+    suspend fun registerProduct(@Body product:Product):Response<ProductResponse>
+    @Multipart
+    @PUT("/update/profPicture")
+    suspend fun uploadImage(
+        @Header("Authorization") token:String,
+        @Part file: MultipartBody.Part
+    ):Response<LoginResponse>
+
+    @FormUrlEncoded
+    @POST("update/details")
+    suspend fun editDetails(
+        @Header("Authorization") token:String,
+        @Field("si_Firstname") fn:String,
+        @Field("si_Lastname") ln:String,
+        @Field("si_Username") un:String,
+        @Field("si_Email") em:String,
+    ):Response<LoginResponse>
 }

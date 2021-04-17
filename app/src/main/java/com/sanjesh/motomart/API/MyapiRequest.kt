@@ -16,7 +16,7 @@ abstract class MyapiRequest {
             val message = StringBuilder()
             error?.let {
                 try {
-                    message.append(JSONObject(it).getString("success"))
+                    message.append(JSONObject(it).getString("message"))
                 } catch (e: JSONException) {
                 }
                 message.append("\n")
