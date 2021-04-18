@@ -1,13 +1,37 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fragments.SettingsFragment">
+    android:orientation="vertical"
+    tools:context="fragments.Settings_fragments">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:paddingLeft="20dp"
+        android:text="Account"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello world" />
-
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:id="@+id/btn"/>
+    <TextView
+        android:paddingLeft="20dp"
+        android:text="Cart"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Cart"/>
+    <TextView
+        android:paddingLeft="20dp"
+        android:text="Logout"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Logout"/>
+    <TextView
+        android:paddingLeft="20dp"
+        android:text="About Us"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/aboutUs"/>
+</LinearLayout>

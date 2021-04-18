@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 
-class Logout(val activity: Activity, val context: Context) {
+class LogOut(val activity: Activity, val context: Context) {
     fun logout()
     {
         var pref = activity.getSharedPreferences("credentials", Context.MODE_PRIVATE)

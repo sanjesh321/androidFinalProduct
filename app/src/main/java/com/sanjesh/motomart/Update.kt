@@ -17,6 +17,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.PopupMenu
 import com.google.android.material.snackbar.Snackbar
+import com.sanjesh.motomart.API.Servicebuilder
 import com.sanjesh.motomart.DB.UserDB
 import com.sanjesh.motomart.Repository.User_Repository
 import kotlinx.coroutines.CoroutineScope
@@ -69,7 +70,7 @@ class Update : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
             {
                 if(user.si_profilepic != null && user.si_profilepic!="no-img.jpg")
                 {
-                    var imgPath = ServiceBuilder.loadImagePath()+user.si_profilepic!!.replace("\\","/")
+                    var imgPath = Servicebuilder.loadImagePath()+user.si_profilepic!!.replace("\\","/")
                     Glide.with(this@Update).load(imgPath).into(ivPp)
                 }
                 else

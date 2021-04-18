@@ -38,23 +38,11 @@ class Home_fragment : Fragment() {
 
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        addImageSlider()
-        val imageSlider = view.findViewById<ImageSlider>(R.id.image_slider)
-        imageSlider.setImageList(imageList)
-        //reclycler view for categories
         homeCategory = view.findViewById(R.id.homeCategory)
         saleGridView = view.findViewById(R.id.saleGridView)
-        loadcategories()
         loadSaleProduct()
         return view
     }
-
-    fun addImageSlider() {
-        imageList.add(SlideModel(R.drawable.psu, "Power Supply"))
-        imageList.add(SlideModel(R.drawable.img1, "Cases"))
-        imageList.add(SlideModel(R.drawable.rtx, "Graphic Card"))
-    }
-
     fun loadSaleProduct(){
         CoroutineScope(Dispatchers.IO).launch {
             try {
