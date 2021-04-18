@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sanjesh.motomart.Adapter.Home_Adapter
 import com.sanjesh.motomart.Adapter.Product_Adapter
 import com.sanjesh.motomart.Entity.category
 import com.sanjesh.motomart.Entity.product
@@ -56,62 +55,6 @@ class Home_fragment : Fragment() {
         imageList.add(SlideModel(R.drawable.rtx, "Graphic Card"))
     }
 
-    fun loadcategories() {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                lstCategory.add(
-                    category(
-                        "https://st2.depositphotos.com/3265223/11737/v/950/depositphotos_117379428-stock-illustration-cpu-icon-central-processing-unit.jpg",
-                        "CPU"
-                    )
-                )
-                lstCategory.add(
-                    category(
-                        "https://png.pngtree.com/png-clipart/20190614/original/pngtree-vector-room-cooler-icon-png-image_3762890.jpg",
-                        "CPU"
-                    )
-                )
-                lstCategory.add(
-                    category(
-                        "https://png.pngtree.com/png-clipart/20190614/original/pngtree-vector-room-cooler-icon-png-image_3762890.jpg",
-                        "CPU"
-                    )
-                )
-                lstCategory.add(
-                    category(
-                        "https://st2.depositphotos.com/3265223/11737/v/950/depositphotos_117379428-stock-illustration-cpu-icon-central-processing-unit.jpg",
-                        "CPU"
-                    )
-                )
-                lstCategory.add(
-                    category(
-                        "https://png.pngtree.com/png-clipart/20190614/original/pngtree-vector-room-cooler-icon-png-image_3762890.jpg",
-                        "CPU"
-                    )
-                )
-                lstCategory.add(
-                    category(
-                        "https://png.pngtree.com/png-clipart/20190614/original/pngtree-vector-room-cooler-icon-png-image_3762890.jpg",
-                        "CPU"
-                    )
-                )
-                withContext(Dispatchers.Main) {
-                    homeCategory.layoutManager =
-                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                    homeCategory.adapter = Home_Adapter(lstCategory, context!!)
-
-                }
-            } catch (ex: Exception) {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(
-                        context,
-                        "Error : ${ex.toString()}", Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-
-        }
-    }
     fun loadSaleProduct(){
         CoroutineScope(Dispatchers.IO).launch {
             try {

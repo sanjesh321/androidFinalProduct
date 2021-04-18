@@ -1,5 +1,5 @@
 package com.sanjesh.motomart.Interface
 
-interface Resfresh_Cart {
+interface RefreshCart {
     fun refreshCartActivity()
 }

@@ -11,10 +11,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.sanjesh.motomart.API.Servicebuilder
 import com.sanjesh.motomart.API.Static_cart
 import com.sanjesh.motomart.Entity.cart
+import com.sanjesh.motomart.Interface.RefreshCart
 import com.sanjesh.motomart.R
 import com.sanjesh.motomart.Repository.Cart_Repository
 import kotlinx.coroutines.CoroutineScope
@@ -22,8 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class Cart_Adapter(val context: Context, var lstCart:MutableList<cart>, var refresh:CartRefresh):
-    RecyclerView.Adapter<Cart_Adapter.CartViewHolder>() {
+class Cart_Adapter(val context: Context, var lstCart:MutableList<cart>, var refresh:RefreshCart):RecyclerView.Adapter<Cart_Adapter.CartViewHolder>() {
     class CartViewHolder(val view: View): RecyclerView.ViewHolder(view) {
         val tvProduct: TextView
         val tvPrice: TextView

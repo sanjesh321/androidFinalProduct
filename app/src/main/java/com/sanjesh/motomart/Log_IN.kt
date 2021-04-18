@@ -34,7 +34,7 @@ class Log_IN : AppCompatActivity() {
         setContentView(R.layout.activity_log_i_n)
         etUid=findViewById(R.id.etUid)
         etPass=findViewById(R.id.etPass)
-        cbRemember=findViewById(R.id.cbRemember)
+        cbRemember=findViewById(R.id.cbCheck)
         checkRunTimePermission()
     }
     private fun saveSharedPref() {

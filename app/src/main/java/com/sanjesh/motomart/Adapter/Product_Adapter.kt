@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sanjesh.motomart.API.Servicebuilder
 import com.sanjesh.motomart.Entity.product
 import com.sanjesh.motomart.Product_View
@@ -28,7 +29,7 @@ class Product_Adapter(
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.productview, parent, false)
+            .inflate(R.layout.products, parent, false)
         return ProductViewHolder(view)
     }
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {

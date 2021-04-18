@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.sanjesh.motomart.API.Static_cart
 import com.sanjesh.motomart.Adapter.Cart_Adapter
+import com.sanjesh.motomart.Interface.RefreshCart
 import com.sanjesh.motomart.Main_Activity
 import com.sanjesh.motomart.R
 import com.sanjesh.motomart.Repository.Cart_Repository
@@ -21,7 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class Category_fragment : Fragment(),View.OnClickListener,Refresh_Cart{
+class motoMart : Fragment(),View.OnClickListener,RefreshCart{
     private lateinit var tvCartDesc : TextView
     private lateinit var btnContinue : Button
     private lateinit var recycler: RecyclerView
@@ -33,7 +34,7 @@ class Category_fragment : Fragment(),View.OnClickListener,Refresh_Cart{
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_category_fragment, container, false)
+        val view = inflater.inflate(R.layout.fragment_motomart, container, false)
         tvCartDesc = view.findViewById(R.id.tvCartDesc)
         btnContinue = view.findViewById(R.id.btnContinue)
         recycler = view.findViewById(R.id.recycler)
@@ -195,7 +196,7 @@ class Category_fragment : Fragment(),View.OnClickListener,Refresh_Cart{
         checkout.visibility = View.GONE
         if(Static_cart.lstCart.size > 0)
         {
-            tvCartDesc.text = "${StaticCart.lstCart.size} items in cart."
+            tvCartDesc.text = "${Static_cart.lstCart.size} items in cart."
             btnContinue.visibility = View.GONE
         }
         else
