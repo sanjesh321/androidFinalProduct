@@ -2,6 +2,7 @@ package com.sanjesh.motomart
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -9,6 +10,7 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.sanjesh.motomart.API.Servicebuilder
 import com.sanjesh.motomart.DB.UserDB
@@ -82,6 +84,7 @@ class Log_IN : AppCompatActivity() {
         return flag
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun login(view: View) {
         if(validate()){
             CoroutineScope(Dispatchers.IO).launch {

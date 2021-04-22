@@ -1,6 +1,6 @@
 package com.sanjesh.motomart.API
 
-import Login_Response
+import LoginResponse
 import com.sanjesh.motomart.Entity.User
 import com.sanjesh.motomart.Entity.product
 import com.sanjesh.motomart.Response.Product_Response
@@ -18,7 +18,7 @@ interface Myapi {
     suspend fun checkUser(
         @Field("si_Email") username: String,
         @Field("si_password") password: String
-    ): Response<Login_Response>
+    ): Response<LoginResponse>
 
     @POST("regProduct")
     suspend fun registerProduct(@Body product:product):Response<Product_Response>
@@ -27,7 +27,7 @@ interface Myapi {
     suspend fun uploadImage(
         @Header("Authorization") token:String,
         @Part file: MultipartBody.Part
-    ):Response<Login_Response>
+    ):Response<LoginResponse>
 
     @FormUrlEncoded
     @POST("update/details")
@@ -37,5 +37,5 @@ interface Myapi {
         @Field("si_Lastname") ln:String,
         @Field("si_Username") un:String,
         @Field("si_Email") em:String,
-    ):Response<Login_Response>
+    ):Response<LoginResponse>
 }

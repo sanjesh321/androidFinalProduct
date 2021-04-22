@@ -17,13 +17,6 @@
             android:hint="Search"/>
 
     </LinearLayout>
-    <com.denzcoskun.imageslider.ImageSlider
-        android:id="@+id/image_slider"
-        android:layout_width="wrap_content"
-        android:layout_height="250dp"
-        app:iss_auto_cycle="true"
-        app:iss_delay="0"
-        app:iss_period="5000" />
 
     <TextView
         android:layout_width="match_parent"

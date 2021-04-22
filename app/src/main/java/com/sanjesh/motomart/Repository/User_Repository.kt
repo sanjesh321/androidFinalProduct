@@ -1,6 +1,6 @@
 package com.sanjesh.motomart.Repository
 
-import Login_Response
+import LoginResponse
 import com.sanjesh.motomart.API.Myapi
 import com.sanjesh.motomart.API.MyapiRequest
 import com.sanjesh.motomart.API.Servicebuilder
@@ -16,18 +16,18 @@ class User_Repository:MyapiRequest() {
             Myapi.registerUser(user)
         }
     }
-    suspend fun checkUser(username : String, password : String): Login_Response {
+    suspend fun checkUser(username : String, password : String): LoginResponse {
         return apiRequest {
             Myapi.checkUser(username, password)
         }
     }
     suspend fun uploadImage( body: MultipartBody.Part)
-            : Login_Response {
+            : LoginResponse {
         return apiRequest {
             Myapi.uploadImage(Servicebuilder.token!!, body)
         }
     }
-    suspend fun editUser(fn:String,ln:String,em:String,un:String):Login_Response{
+    suspend fun editUser(fn:String,ln:String,em:String,un:String):LoginResponse{
         return apiRequest {
             Myapi.editDetails(Servicebuilder.token!!, fn,ln,em,un)
         }

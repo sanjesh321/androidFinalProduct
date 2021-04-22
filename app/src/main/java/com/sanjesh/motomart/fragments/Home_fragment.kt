@@ -22,7 +22,6 @@ class Home_fragment : Fragment() {
     private lateinit var homeCategory: RecyclerView
     private lateinit var saleGridView: RecyclerView
     //    private lateinit var productView:ConstraintLayout
-    val imageList = ArrayList<SlideModel>() // Create image list
     private var lstCategory = ArrayList<category>()
     private var lstProduct : MutableList<product> = mutableListOf()
 
@@ -43,7 +42,7 @@ class Home_fragment : Fragment() {
         loadSaleProduct()
         return view
     }
-    fun loadSaleProduct(){
+    fun loadSaleProduct() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val repo = Product_Repository()
@@ -66,4 +65,4 @@ class Home_fragment : Fragment() {
             }
 
         }
-    }
+    }}
